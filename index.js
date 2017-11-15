@@ -103,6 +103,9 @@ class SortRow extends React.Component {
     const layout = props.list.state.active.layout
     const wrapperLayout = props.list.wrapperLayout
 
+    // fix crash by undefined wrapperLayout 
+    const wPageY = wrapperLayout.pageY || props.pageMarginTop || 0;
+
     this.state = {
       style: {
         position: 'absolute',
@@ -112,7 +115,7 @@ class SortRow extends React.Component {
         height: layout.frameHeight,
         overflow: 'hidden',
         backgroundColor: 'transparent',
-        marginTop: layout.pageY - wrapperLayout.pageY, // Account for top bar spacing
+        marginTop: layout.pageY - wPageY, // Account for top bar spacing
       },
     }
   }
