@@ -104,7 +104,7 @@ class SortRow extends React.Component {
     const wrapperLayout = props.list.wrapperLayout
 
     // fix crash by undefined wrapperLayout 
-    const wPageY = wrapperLayout.pageY || props.pageMarginTop || 0;
+    const wPageY = wrapperLayout ?  wrapperLayout.pageY : props.pageMarginTop;
 
     this.state = {
       style: {
