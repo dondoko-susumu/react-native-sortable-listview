@@ -103,8 +103,8 @@ class SortRow extends React.Component {
     const layout = props.list.state.active.layout
     const wrapperLayout = props.list.wrapperLayout
 
-    // fix crash by undefined wrapperLayout 
-    const wPageY = wrapperLayout ?  wrapperLayout.pageY : props.pageMarginTop;
+    // fix crash by undefined wrapperLayout
+    const wPageY = wrapperLayout ?  wrapperLayout.pageY : props.pageMarginTop
 
     this.state = {
       style: {
@@ -309,7 +309,9 @@ class SortableListView extends React.Component {
         return requestAnimationFrame(this.scrollAnimation)
       }
 
-      const SCROLL_OFFSET = this.wrapperLayout.pageY
+      // fix crash by undefined wrapperLayout
+      const wPageY = this.wrapperLayout ? this.wrapperLayout.pageY : this.props.pageMarginTop
+      const SCROLL_OFFSET = wPageY
       const moveY = this.moveY - SCROLL_OFFSET
       const SCROLL_LOWER_BOUND = 80
       const SCROLL_HIGHER_BOUND = this.listLayout.height - SCROLL_LOWER_BOUND
@@ -351,7 +353,9 @@ class SortableListView extends React.Component {
     const SLOP = this.direction === 'down' ? itemHeight : 0
     const scrollValue = this.scrollValue
 
-    const moveY = this.moveY - this.wrapperLayout.pageY
+    // fix crash by undefined wrapperLayout
+    const wPageY = this.wrapperLayout ? this.wrapperLayout.pageY : this.props.pageMarginTop
+    const moveY = this.moveY - wPageY
 
     const activeRowY = scrollValue + moveY - this.firstRowY
 
